@@ -6,17 +6,16 @@ for (let i = 0; i < input.length; i++) {
         count++;
     }
 }
-console.log("count:", count);
+console.log("🤿 Count Part 1:", count);
 
-// try with reduce
-// still need to work some stuff out
+// reduce solution:
 let countR = 0;
-const increaseCount = (prev, curr) => {
+const countOfIncreases = (prev, curr) => {
     if (prev < curr) countR++;
     return curr;
 };
-input.reduce(increaseCount);
-console.log("countR:", countR);
+input.reduce(countOfIncreases);
+console.log("🤿 Count using reduce:", countR);
 
 //// PART 2
 // rolling window <----- look into this :D
@@ -30,4 +29,33 @@ for (let i = 0; i < inp.length; i++) {
         countTwo++;
     }
 }
-console.log("countTwo:", countTwo);
+console.log("✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨");
+console.log("🤿 🤿 Count Part Two:", countTwo);
+
+// reduce solution attempt:
+// toWindows solution altered from stackoverflow
+const toWindows = (initialArr, rollingSize) => {
+    return initialArr.reduce((acc, _, i, arr) => {
+        if (i + rollingSize > arr.length) {
+            //no more things to go over, return acc
+            return acc;
+        }
+        return acc.concat(
+            [arr.slice(i, i + rollingSize)] // array wrap needed...otherwise concat flattens stuff
+        );
+    }, []);
+};
+// toWindowsSum
+const toWindowsSum = (initialArr, rollingSize) => {
+    return initialArr.reduce((acc, _, i, arr) => {
+        if (i + rollingSize > arr.length) {
+            return acc;
+        }
+        return acc.concat([
+            arr.slice(i, i + rollingSize).reduce((a, b) => a + b),
+        ]);
+    }, []);
+};
+countR = 0; // reset countR (work out how to scope that ;)...)
+toWindowsSum(input, 3).reduce(countOfIncreases);
+console.log("🤿 🤿  Reduce Count Part 2:", countR);
