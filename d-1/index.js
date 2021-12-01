@@ -10,10 +10,12 @@ console.log("count:", count);
 
 // try with reduce
 // still need to work some stuff out
+let countR = 0;
 const increaseCount = (prev, curr) => {
     if (prev < curr) countR++;
+    return curr;
 };
-input.reduce(increaseCount, (countR = 0));
+input.reduce(increaseCount);
 console.log("countR:", countR);
 
 //// PART 2
