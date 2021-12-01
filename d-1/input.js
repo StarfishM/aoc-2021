@@ -1997,7 +1997,9 @@ module.exports.input = `157
 8010
 8016
 8020
-8026`.split(/\n/);
+8026`
+    .split(/\n/)
+    .map((each) => +each);
 
 module.exports.testInput = `199
 200
@@ -2008,4 +2010,6 @@ module.exports.testInput = `199
 240
 269
 260
-263`.split(/\n/);
+263`
+    .split(/\n/)
+    .map((each) => +each);
