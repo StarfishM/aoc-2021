@@ -34,3 +34,32 @@ function getPosition(arr) {
 // getPostition(testInput);
 ////PART 1
 console.log("Part 1 Postition:", getPosition(input));
+
+//////////////////// PART 2
+/*In addition to horizontal position and depth, you'll also need to track a third value, aim, which also starts at 0. The commands also mean something entirely different than you first thought:
+
+down X increases your aim by X units.
+up X decreases your aim by X units.
+forward X does two things:
+It increases your horizontal position by X units.
+It increases your depth by your aim multiplied by X.
+ */
+
+function getPositionWithAim(arr) {
+    let x = 0;
+    let y = 0;
+    let aim = 0;
+    arr.forEach((each) => {
+        if (each.forward) {
+            x += each.forward;
+            // increases depth by x*aim
+            y += each.forward * aim;
+        } else {
+            // dowm aim goes up!! up aim goes down
+            each.up ? (aim -= each.up) : (aim += each.down);
+        }
+    });
+    return x * y;
+}
+
+console.log("Part 2 Postition:", getPositionWithAim(input));
