@@ -103,5 +103,6 @@ const co2 = parseInt(filterInputCO2(input, co2Filter, 0), 2);
 console.log("------solution Part 2:", o2 * co2);
 
 // Thoughts for second approach:
-// create array of objects, that keep track the col most occurence
-// create a new array per col? of maybe have subarrays
+// create array of objects, that keeps track the col most occurence
+// create a new array per row? of maybe have subarrays
+// cut array of most occurence with the same frequence that you filter the existing array
