@@ -1,11 +1,11 @@
-<h1 style="align:center;">Advent of Code 2021</h1>
+<h1 align="center">Advent of Code 2021</h1>
 
 <p align="center">
     <a title="Advent of Code" href="https://adventofcode.com/2021">
         <img alt="Advent of Code Logo" src="advent_of_code_logo.png" width="300"/>
     </a>
 </p>
-----
+
 ## Puzzles
 
 -   ⭐️⭐️ [Day 1: Sonar Sweep](./d-1) ➡️ [[input](./d-1/input.js), [solution](./d-1/index.js)]
