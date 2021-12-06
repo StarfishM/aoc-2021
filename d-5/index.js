@@ -73,4 +73,5 @@ let crossOverCount = 0;
 for (var coords in pointsDrawn) {
     if (pointsDrawn[coords] >= 2) crossOverCount++;
 }
+
 console.log("crossOverCount PART 2", crossOverCount);
