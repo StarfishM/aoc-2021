@@ -29,53 +29,48 @@ function drawLines(x1, y1, x2, y2) {
 function drawDiagonals(x1, y1, x2, y2) {
     if (x1 != x2 && y1 != y2) {
         if (x1 > x2 && y1 < y2) {
-            //draw diagonal down
+            //draw diagonal down right
             // decrease x and at the same time decrease y2
             for (let x = x1; x >= x2; x--) {
-                addPoints(`${x},${y2}`);
-                y2--;
+                addPoints(`${x},${y1}`);
+                y1++;
             }
         } else if (x1 > x2 && y1 > y2) {
-            //draw diagonal down
+            //draw diagonal down left
             // decrease x and at the same time decrease y1
-
             for (let x = x1; x >= x2; x--) {
                 addPoints(`${x},${y1}`);
                 y1--;
             }
         } else if (x1 < x2 && y1 < y2) {
-            // draw diagonal up
+            // draw diagonal up right
             // at same time increase y1
-            console.log("x1,y1:", x1, y1);
-            console.log("x2,y2:", x2, y2);
             for (let x = x1; x <= x2; x++) {
                 addPoints(`${x},${y1}`);
-                console.log("`${x},${y1}`", `${x},${y1}`);
-                console.log("crossScore", pointsDrawn[`${x},${y1}`]);
                 y1++;
             }
+        } else if (x1 < x2 && y1 > y2) {
+            // draw diagonal up left right
+            // at same time decrease y1
+            for (let x = x1; x <= x2; x++) {
+                addPoints(`${x},${y1}`);
+                y1--;
+            }
         }
-        // else if (x1 < x2 && y1 > y2) {
-        //     // draw diagonal up
-        //     // at same time increase y1
-        //     for (let x = x1; x <= x2; x++) {
-        //         addPoints(`${x},${y2}`);
-        //         y2++;
-        //     }
-        // }
     }
 }
 
-testInput.forEach((each) => {
+// testInput.forEach((each) => {
+//     drawLines(each.x1, each.y1, each.x2, each.y2);
+//     drawDiagonals(each.x1, each.y1, each.x2, each.y2);
+// });
+input.forEach((each) => {
     drawLines(each.x1, each.y1, each.x2, each.y2);
     drawDiagonals(each.x1, each.y1, each.x2, each.y2);
 });
-// input.forEach((each) => {
-//     drawLines(each.x1, each.y1, each.x2, each.y2);
-// });
 
 let crossOverCount = 0;
 for (var coords in pointsDrawn) {
     if (pointsDrawn[coords] >= 2) crossOverCount++;
 }
-console.log("crossOverCount PART 1", crossOverCount);
+console.log("crossOverCount PART 2", crossOverCount);
