@@ -44,11 +44,22 @@ const calculateFuelCount = (arr, targetPosition) => {
     return totalFuelCount;
 };
 
+const calculateFuelCountP2 = (arr, targetPosition) => {
+    let totalFuelCount = 0;
+    for (let i = 0; i < arr.length; i++) {
+        let distance = Math.abs(arr[i] - targetPosition);
+        const fuelCostArr = Array.from({ length: distance }, (_, i) => i + 1);
+        totalFuelCount +=
+            fuelCostArr.length > 0 ? fuelCostArr.reduce((a, b) => a + b) : 0;
+    }
+    return totalFuelCount;
+};
+
 const checkAndCompareFuelCounts = (arr) => {
     let currTarget = 0;
     let lowestPossibleFuelCount = {};
     while (currTarget <= arr.length - 1) {
-        const currFuelCount = calculateFuelCount(arr, currTarget);
+        const currFuelCount = calculateFuelCountP2(arr, currTarget);
         if (lowestPossibleFuelCount.fuelCount == undefined) {
             lowestPossibleFuelCount.fuelCount = currFuelCount;
             lowestPossibleFuelCount.position = currTarget;
@@ -62,7 +73,12 @@ const checkAndCompareFuelCounts = (arr) => {
     }
     return lowestPossibleFuelCount;
 };
+// console.log(
+//     "lowest possible fuelCount PART 1:",
+//     checkAndCompareFuelCounts(puzzleInput)
+// );
+
 console.log(
-    "lowest possible fuelCount PART 1:",
+    "lowest possible fuelCount PART 2:",
     checkAndCompareFuelCounts(puzzleInput)
 );
