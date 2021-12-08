@@ -1,23 +1,13 @@
-const testInput = `be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |
-fdgacbe cefdb cefbgd gcbe
-edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec |
-fcgedb cgb dgebacf gc
-fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef |
-cg cg fdcagb cbg
-fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega |
-efabcd cedba gadfec cb
-aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga |
-gecf egdcabf bgf bfgea
-fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf |
-gebdcfa ecba ca fadegcb
-dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf |
-cefg dcbef fcge gbcadfe
-bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd |
-ed bcgafe cdgba cbgef
-egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg |
-gbdfcae bgc cg cgb
-gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc |
-fgae cfgab fg bagce`;
+const testInput = `be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
+edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
+fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg
+fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb
+aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga | gecf egdcabf bgf bfgea
+fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf | gebdcfa ecba ca fadegcb
+dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbcadfe
+bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef
+egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
+gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce`;
 
 const input = `afebd ecdgfb gacfed dgaeb bf acefd fgdabec bfd bedcaf bafc | afcbed fb bfd bdf
 eabcdg fc fbce dbfagc cagbdfe cbdge fgc gfade ecdgfb gfedc | cf fgbacd fecb becdg
@@ -220,20 +210,6 @@ ga dafcb fcagb cfdebga gaf fcdagb fcbeg cgad cdfeab dbfgea | fbecdga ag dcga dca
 eafgbd afcbeg cdfabge acdbf gfbec cgbefd edf de dceg decfb | def ecdg abfgde de
 ea fdabg fbdcgea cebfda fcbgde abgdec dae ebdfa eacf bcedf | acfe afce bgfda ade`;
 
-const parseTestData = (str) => {
-    const parsedData = str.split(/\n/).map((each, i) => {
-        const obj = {};
-        if (i % 2 !== 0) {
-            obj.outVal = each.split(" ");
-        } else {
-            obj.usp = each.replace(" |", "").split(" ");
-        }
-        return obj;
-    });
-
-    return parsedData;
-};
-
 const parseData = (str) => {
     const parsedData = str.split(/\n/).map((each) => {
         const obj = {};
@@ -245,5 +221,5 @@ const parseData = (str) => {
     return parsedData;
 };
 
-module.exports.testInput = parseTestData(testInput);
+module.exports.testInput = parseData(testInput);
 module.exports.input = parseData(input);
