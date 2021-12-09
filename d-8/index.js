@@ -1,23 +1,16 @@
 const { testInput, input } = require("./input.js");
 
-const puzzleInput = testInput;
+const puzzleInput = input;
 
 // PART 1
 // only care about outputs
 const allOutputs = [...puzzleInput.map((each) => each.outVal)].flat();
 
-const is1 = (str) => {
-    return str.length === 2;
-};
-const is4 = (str) => {
-    return str.length === 4;
-};
-const is7 = (str) => {
-    return str.length === 3;
-};
-const is8 = (str) => {
-    return str.length === 7;
-};
+const is1 = (str) => str.length === 2;
+const is4 = (str) => str.length === 4;
+const is7 = (str) => str.length === 3;
+const is8 = (str) => str.length === 7;
+
 const find1478 = (arr) => {
     let countNums = 0;
     arr.forEach((outputSig) => {
@@ -34,7 +27,6 @@ const find1478 = (arr) => {
 console.log("part 1:", find1478(allOutputs));
 
 // PART 2
-// set 1 -set 2 not the same as set 2 -set 1
 /*acedgfb: 8
 cdfbe: 5
 gcdfa: 2
@@ -65,132 +57,58 @@ cefg dcbef fcge gbcadfe: 4548
 ed bcgafe cdgba cbgef: 1625
 gbdfcae bgc cg cgb: 8717
 fgae cfgab fg bagce: 4315 */
-// const decode1478 = (str) => {
-//     if (is1(str)) return 1;
-//     if (is4(str)) return 4;
-//     if (is7(str)) return 7;
-//     if (is8(str)) return 8;
-//     if (!is1(str) && !is4(str) && !is7(str) && !is8(str)) {
-//         // return undefined;
-//         if (is235(str)) {
-//             console.log("str:", str);
-//         }
-//     }
-// };
 
-const decode3 = (str, dict, numToCheck) => {
-    // 3 contains all of 7
-    if (str.length != 5) return;
-    const sequenceToCheck = str.split("");
-    if (containsAllVals(sequenceToCheck, dict[1])) {
-        return sequenceToCheck;
-    }
+const decode325 = (arrUsp, dict) => {
+    // 3 contains all of 1
+    // 5 is contained in 6 2 is not
+    // whatever is left has to be 2
+    const decoded325 = arrUsp.map((sig) => {
+        if (sig.length != 5) return;
+        const sequenceToCheck = sig.split("");
+        if (containsAllVals(sequenceToCheck, dict[1])) {
+            return { 3: sequenceToCheck };
+        } else if (containsAllVals(dict[6], sequenceToCheck)) {
+            return { 5: sequenceToCheck };
+        } else {
+            return { 2: sequenceToCheck };
+        }
+    });
+    return decoded325.filter(Boolean);
 };
 
-const decode9 = (str, dict) => {
-    // 0 is contained by 8
+const decode906 = (arrUsp, dict) => {
+    // 8 includes all of 9 and 9 includes all of 4
+    // 8 includes all of 0 and 0 does not inclues all of 4
+    // 8 includes all of 6 and
     // all of 4 is in 9 and 6, all of but not in 0
     // all of 3 is in 9 but not in 6
-    if (str.length != 6) return;
-    const sequenceToCheck = str.split("");
-    if (
-        containsAllVals(sequenceToCheck, dict[4]) &&
-        containsAllVals(sequenceToCheck, dict[3])
-    ) {
-        return sequenceToCheck;
-    }
+    const decoded906 = arrUsp.map((sig) => {
+        if (sig.length != 6) return;
+        const sequenceToCheck = sig.split("");
+        if (
+            containsAllVals(sequenceToCheck, dict[4]) &&
+            containsAllVals(dict[8], sequenceToCheck)
+        ) {
+            return { 9: sequenceToCheck };
+        } else if (
+            containsAllVals(dict[8], sequenceToCheck) &&
+            !containsAllVals(sequenceToCheck, dict[4]) &&
+            containsAllVals(sequenceToCheck, dict[7])
+        ) {
+            return { 0: sequenceToCheck };
+        } else {
+            return { 6: sequenceToCheck };
+        }
+    });
+    return decoded906.filter(Boolean);
 };
 
-const decode0 = (str, dict) => {
-    // all of 0 is in 8 but 4 is not in 0
-    if (str.length != 6) return;
-    const sequenceToCheck = str.split("");
-
-    if (
-        containsAllVals(dict[8], sequenceToCheck) &&
-        !containSameVals(sequenceToCheck, dict[9]) &&
-        !containsAllVals(dict[4], sequenceToCheck)
-    ) {
-        return sequenceToCheck;
-    }
-};
-
-const decode6 = (str, dict) => {
-    // 0 and 9 exist, so has to be 6
-    if (str.length != 6) return;
-    const sequenceToCheck = str.split("");
-    console.log("dict[0]", dict[0]);
-    console.log("dict[9]", dict[9]);
-    console.log("sequenceToCheck", sequenceToCheck);
-    console.log(
-        !containsAllVals(dict[0], sequenceToCheck) &&
-            !containsAllVals(dict[9], sequenceToCheck)
-    );
-    if (
-        !containsAllVals(dict[0], sequenceToCheck) &&
-        !containsAllVals(dict[9], sequenceToCheck)
-    ) {
-        return sequenceToCheck;
-    }
-};
-const decode5 = (str, dict) => {
-    // all of 5 is in 6, not all of 2 nor all of 3 is in 6
-    if (str.length != 5) return;
-    const sequenceToCheck = str.split("");
-
-    if (
-        containsAllVals(dict[6], sequenceToCheck) &&
-        !containSameVals(sequenceToCheck, dict[3])
-    ) {
-        return sequenceToCheck;
-    }
-};
-
-const decode2 = (str, dict) => {
-    //decoded 3 and 5 so has to be two
-    if (str.length != 5) return;
-    const sequenceToCheck = str.split("");
-
-    if (
-        !containSameVals(dict[3], sequenceToCheck) &&
-        !containSameVals(dict[5], sequenceToCheck) &&
-        !containsAllVals(sequenceToCheck, dict[1])
-    ) {
-        return sequenceToCheck;
-    }
-};
 const containsAllVals = (arr, target) => target.every((v) => arr.includes(v));
 const containSameVals = (arr1, arr2) =>
     containsAllVals(arr1, arr2) && containsAllVals(arr2, arr1);
-const is235 = (str) => str.length === 5;
-// 3 contains all of 7
-// whatever is left over is the character that is in 2 and 5
-// 2 and 5 have one different this differenece 2 shares with 3
-const is069 = (str) => str.length === 6;
-// 0 is contained in 8
-// 0 has one difference to 9
-// 9 has one difference to 8
-// 6 has one difference to 8
-// 6 and 9 have one difference
-// 0 has one difference to 6 and 9 that the two of them have in
-// common
-
-// decode 1478
-// puzzleInput.forEach((display) => {
-//     display.outVal.forEach((each) => {
-//         decode1478(each);
-//     });
-// });
-
-// puzzleInput.forEach((display) => {
-//     display.outVal.forEach((each) => {
-//         if (is235(each)) decode235(each);
-//     });
-// });
 
 // decode 1478
 puzzleInput.map((display) => {
-    // display.decoded = [];
     display.decodedDict = {
         0: [],
         1: [],
@@ -204,7 +122,6 @@ puzzleInput.map((display) => {
         9: [],
     };
     display.usp.forEach((each) => {
-        // display.decoded.push(decode1478(each));
         if (is1(each)) display.decodedDict[1] = each.split("");
         if (is4(each)) display.decodedDict[4] = each.split("");
         if (is7(each)) display.decodedDict[7] = each.split("");
@@ -213,44 +130,44 @@ puzzleInput.map((display) => {
     return display;
 });
 
-//decode 235 & 069
+// decode 069 AND 235
 puzzleInput.map((display) => {
-    display.usp.forEach((each) => {
-        const sequenceFor3 = decode3(each, display.decodedDict);
-        if (sequenceFor3) display.decodedDict[3] = sequenceFor3;
-        const sequenceFor9 = decode9(each, display.decodedDict);
-        if (sequenceFor9) display.decodedDict[9] = sequenceFor9;
-        const sequenceFor0 = decode0(each, display.decodedDict);
-        if (sequenceFor0) display.decodedDict[0] = sequenceFor0;
-        const sequenceFor6 = decode6(each, display.decodedDict);
-        if (sequenceFor6) display.decodedDict[6] = sequenceFor6;
-        const sequenceFor5 = decode5(each, display.decodedDict);
-        if (sequenceFor5) display.decodedDict[5] = sequenceFor5;
-        const sequenceFor2 = decode2(each, display.decodedDict);
-        if (sequenceFor2) display.decodedDict[2] = sequenceFor2;
-    });
+    const decoded906 = decode906(display.usp, display.decodedDict);
+    if (decoded906.length > 0) {
+        decoded906.forEach((decodedObj) => {
+            for (let prop in decodedObj) {
+                display.decodedDict[prop] = decodedObj[prop];
+            }
+        });
+    }
+    const decoded325 = decode325(display.usp, display.decodedDict);
+    if (decoded325.length > 0) {
+        decoded325.forEach((decodedObj) => {
+            for (let prop in decodedObj) {
+                display.decodedDict[prop] = decodedObj[prop];
+            }
+        });
+    }
 });
 
-console.log("puzzleInput:", puzzleInput[3]);
-
 /// now all displays have a decoded dictionary
-// puzzleInput.map((display) => {
-//     let decodeOutVals = "";
-//     display.outVal.forEach((outVal) => {
-//         const outValToCheck = outVal.split("");
-//         for (let key in display.decodedDict) {
-//             if (containSameVals(outValToCheck, display.decodedDict[key])) {
-//                 decodeOutVals += key;
-//             }
-//         }
-//     });
+puzzleInput.map((display) => {
+    let decodeOutVals = "";
+    display.outVal.forEach((outVal) => {
+        const outValToCheck = outVal.split("");
+        for (let key in display.decodedDict) {
+            if (containSameVals(outValToCheck, display.decodedDict[key])) {
+                decodeOutVals += key;
+            }
+        }
+    });
 
-//     display.decoded = decodeOutVals;
-//     return display;
-// });
-// // decoded outputVals with dictionaries
-// let sumOfSignals = 0;
-// puzzleInput.forEach((display) => {
-//     sumOfSignals += Number(display.decoded);
-// });
-// console.log("sumOfSignals", sumOfSignals);
+    display.decoded = decodeOutVals;
+    return display;
+});
+// decoded outputVals with dictionaries
+let sumOfSignals = 0;
+puzzleInput.forEach((display) => {
+    sumOfSignals += Number(display.decoded);
+});
+console.log("sumOfSignals", sumOfSignals);
