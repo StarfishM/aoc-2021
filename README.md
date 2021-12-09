@@ -14,3 +14,6 @@
 -   ⭐️⭐️ [Day 4: Giant Squid](./d-4) ➡️ [[input](./d-4/input.js), [solution](./d-4/index.js)]
 -   ⭐️⭐️ [Day 5: hydrothermal vents](./d-5) ➡️ [[input](./d-5/input.js), [solution](./d-6/index.js)]
 -   ⭐️⭐️ [Day 6: lanternfish](./d-6) ➡️ [[input](./d-6/input.js), [solution](./d-6/index.js)]
+-   ⭐️⭐️ [Day 7: The Treachery of Whales](./d-7) ➡️ [[input](./d-7/input.js), [solution](./d-7/index.js)]
+-   ⭐️⭐️ [Day 8: Seven Segment Search](./d-8) ➡️ [[input](./d-8/input.js), [solution](./d-8/index.js)]
+-   ⭐️ [Day 9: Smoke Basin](./d-9) ➡️ [[input](./d-9/input.js), [solution](./d-9/index.js)]
