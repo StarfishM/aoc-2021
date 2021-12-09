@@ -170,4 +170,4 @@ let sumOfSignals = 0;
 puzzleInput.forEach((display) => {
     sumOfSignals += Number(display.decoded);
 });
-console.log("sumOfSignals", sumOfSignals);
+console.log("Part 2sumOfSignals", sumOfSignals);

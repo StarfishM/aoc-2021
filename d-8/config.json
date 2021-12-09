@@ -1,6 +1,6 @@
 {
-    "day": 0,
-    "title": "",
-    "part1": false,
-    "part2": false
+    "day": 8,
+    "title": "Seven Segment Search",
+    "part1": true,
+    "part2": true
 }
